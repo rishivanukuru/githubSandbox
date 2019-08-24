@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<title>Transitions</title>
+
+		<!--Scripts-->
+	   	<script src="scripts/d3.v4.js"></script>
+ 	</head>
+	<body>
+		<script>
+            
+            var width = 500; // width of the svg
+			
+            var height = 500; // height of the svg
+
+			var svg = d3.select("body").append('svg')
+				.attr("width", width)
+				.attr("height", height);
+            
+           	var rect = svg.append("rect")
+				.attr("x", 50)
+				.attr('y', 50)
+				.attr("width", 100)
+				.attr("height", 100)
+				.attr('fill', "red")
+                .on("click", clickCheck());
+            
+            var bool = true;
+            
+            //
+            
+            function clickCheck()
+            {
+            
+                console.log("Hello");
+                
+                if(rect.attr("width") == 100)
+                    {
+                        rect.transition()
+						.duration(100)
+						.attr("width", 200);
+                    }
+                else
+                    {
+                        rect.transition()
+						.duration(100)
+						.attr("width", 100);
+                    }
+                    
+                    
+            }
+            
+            
+		</script>
+        
+        <script>
+        
+            
+            
+        </script>
+	</body>
+</html>
