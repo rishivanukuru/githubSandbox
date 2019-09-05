@@ -6,10 +6,12 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -33,7 +35,7 @@
     }
     
 section {
-    padding:  180px 50px 10px 50px;
+    padding:  220px 50px 10px 50px;
     line-height: 25px;
     opacity: 0.25;
     font-size: 13px;
@@ -51,45 +53,33 @@ section:last-child {
 <div id='map'></div>
 <div id='features'>
     
-    <section id='preBhujOne' class = 'active'>
+    <section id='prebhujone' class = 'active'>
         <h3>The morning of 24 December 2000<br>Gujarat, India</h3>
         <p>The birds, crocodiles, and other wildlife at the Banni Grasslands have just been disturbed by an earthquake measuring 4.6 on the Richter scale. To them it would have probably felt like a herd of elephants stampeding nearby, which might have been a normal occurance had elephants been living in the Salt Flats of North-western Gujarat. In any case, it was a mild quake far from human settlements, one that must have gone unnoticed by most people at the time.</p>
     </section>
     
-    <section id='preBhujTwo'>
+    <section id='prebhujtwo'>
         <h3>The day before Republic Day,<br> 25 January 2001</h3>
-        <p>Arthur Cadogan West was found dead, head crushed in on train tracks at Aldgate Station at 6AM Tuesday morning. West worked at Woolwich Arsenal on the Bruce-Partington submarine, a secret military project. Plans for the submarine had been stolen and seven of the ten missing papers were found in West's possession. Mycroft implores Sherlock to take the case and recover the three missing papers.</p>
+        <p>In the municipality of Bhuj, people must have been preparing to mark the occasion of Republic day, or might have been looking forward to the long weekend. Maybe neither of those things mattered, and it was just another normal day for everyone. Surely nobody was expecting anything out of the ordinary. Least of all an earthquake. Not when the last major earthquake to strike the region took place nearly half a century prior.  <br><br> That relatively 'quiet' December quake a few kilometers to the north was perhaps the only indicator of what was to come.  </p>
     </section>
     
-    <section id='london-bridge'>
+    <section id='earthquakehistory'>
         <h3>Earthquakes in and around Kutch<br>1960-2000</h3>
-        <p>Story Goes Here</p>
+        <p>To not expect an earthquake would have been the safest thing to do, statistically speaking. In the years since the last destructive earthquake (which occured in 1956), there were hardly any major incidents in or around the state of Gujarat. Minor quakes yes, but the Rann of Kutch is near a fault line, and smaller shakes are to be expected. In the same duration, a number of much more powerful quakes struck parts of Pakistan to the north-west. There were hardly any such occurances this side of the border.</p>
     </section>
     
-    <section id='woolwich'>
+    <section id='nuclear'>
         <h3>Man-made earthquakes<br>The Pokharan Nuclear Tests</h3>
-        <p>Story Goes Here</p>
+        <p>In fact, we even made up for the lack of natural earthquakes by creating our own. The Pokharan Nuclear Tests in the years 1974 and 1998 resulted in the largest recorded seismic activities (M5.0 and M5.8 respectively) in the area for that entire duration.</p>
     </section>
     
-    <section id='gloucester'>
-        <h3>Gloucester Road</h3>
-        <p>Story Goes Here</p>
+    <section id='dday'>
+        <h3>Republic Day 2001</h3>
+        <p>And so when people living in Bhuj and the surrounding villages, towns and cities gathered in their homes and in public spaces to enjoy the holiday, they really had no reason to expect anything out of the ordinary.<br><br>
+        Least of all one of the worst earthquakes to ever to strike India.
+        </p>
     </section>
     
-    <section id='caulfield-gardens'>
-        <h3>13 Caulfield Gardens</h3>
-        <p>Story Goes Here</p>
-    </section>
-    
-    <section id='telegraph'>
-        <h3>The Daily Telegraph</h3>
-        <p>Story Goes Here</p>
-    </section>
-    
-    <section id='charing-cross'>
-        <h3>Charing Cross Hotel</h3>
-        <p>Story Goes Here</p>  
-    </section>
 
     </div>
 <script>
@@ -121,55 +111,36 @@ var map = new mapboxgl.Map({
 
 var chapters = {
 
-    'preBhujOne': {
+    'prebhujone': {
         curve:1,
         //bearing: 27,
         center: [69.763000000000005,23.971],
         zoom: 12
     },
-    'preBhujTwo': {
+    'prebhujtwo': {
         curve: 0.1,
         duration: 5000,
         center: [69.672,23.251],
         zoom: 12.25,
         pitch: 0
     },
-    'london-bridge': {
-        bearing: 90,
-        center: [-0.08533793, 51.50438536],
-        zoom: 13,
-        speed: 0.6,
-        pitch: 40
+    'earthquakehistory': {
+        center: [70.137, 24.202],
+        zoom: 5.48,
+        duration: 3000
     },
-    'woolwich': {
-        bearing: 90,
-        center: [0.05991101, 51.48752939],
-        zoom: 12.3
+    'nuclear': {
+        center: [71.879, 26.972],
+        zoom: 9.96,
+        duration: 3000
+
     },
-    'gloucester': {
-        bearing: 45,
-        center: [-0.18335806, 51.49439521],
-        zoom: 15.3,
-        pitch: 20,
-        speed: 0.5
+    'dday': {
+        duration: 5000,
+        center: [69.672,23.251],
+        zoom: 12.25,
+        pitch: 0
     },
-    'caulfield-gardens': {
-        bearing: 180,
-        center: [-0.19684993, 51.5033856],
-        zoom: 12.3
-    },
-    'telegraph': {
-        bearing: 90,
-        center: [-0.10669358, 51.51433123],
-        zoom: 17.3,
-        pitch: 40
-    },
-    'charing-cross': {
-        bearing: 90,
-        center: [-0.12416858, 51.50779757],
-        zoom: 14.3,
-        pitch: 20
-    }
 };
 
 // On every scroll event, check which element is on screen
