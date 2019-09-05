@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Bhuj - The Singularity</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+
+<style>
+#map {
+    position: fixed;
+    width:50%;
+
+}
+#features {
+    width: 50%;
+    margin-left: 50%;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    background-color: #f6f6f4;
+}
+ #headingtext{
+    padding:  0px 50px;
+    line-height: 25px;
+    }
+    
+section {
+    padding:  180px 50px 10px 50px;
+    line-height: 25px;
+    opacity: 0.25;
+    font-size: 13px;
+}
+        
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 600px;
+}
+</style>
+
+<div id='map'></div>
+<div id='features'>
+    
+    <section id='preBhujOne' class = 'active'>
+        <h3>The morning of 24 December 2000<br>Gujarat, India</h3>
+        <p>The birds, crocodiles, and other wildlife at the Banni Grasslands have just been disturbed by an earthquake measuring 4.6 on the Richter scale. To them it would have probably felt like a herd of elephants stampeding nearby, which might have been a normal occurance had elephants been living in the Salt Flats of North-western Gujarat. In any case, it was a mild quake far from human settlements, one that must have gone unnoticed by most people at the time.</p>
+    </section>
+    
+    <section id='preBhujTwo'>
+        <h3>The day before Republic Day,<br> 25 January 2001</h3>
+        <p>Arthur Cadogan West was found dead, head crushed in on train tracks at Aldgate Station at 6AM Tuesday morning. West worked at Woolwich Arsenal on the Bruce-Partington submarine, a secret military project. Plans for the submarine had been stolen and seven of the ten missing papers were found in West's possession. Mycroft implores Sherlock to take the case and recover the three missing papers.</p>
+    </section>
+    
+    <section id='london-bridge'>
+        <h3>Earthquakes in and around Kutch<br>1960-2000</h3>
+        <p>Story Goes Here</p>
+    </section>
+    
+    <section id='woolwich'>
+        <h3>Man-made earthquakes<br>The Pokharan Nuclear Tests</h3>
+        <p>Story Goes Here</p>
+    </section>
+    
+    <section id='gloucester'>
+        <h3>Gloucester Road</h3>
+        <p>Story Goes Here</p>
+    </section>
+    
+    <section id='caulfield-gardens'>
+        <h3>13 Caulfield Gardens</h3>
+        <p>Story Goes Here</p>
+    </section>
+    
+    <section id='telegraph'>
+        <h3>The Daily Telegraph</h3>
+        <p>Story Goes Here</p>
+    </section>
+    
+    <section id='charing-cross'>
+        <h3>Charing Cross Hotel</h3>
+        <p>Story Goes Here</p>  
+    </section>
+
+    </div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoicmlzaGl2YW51a3VydSIsImEiOiJjazA2eGFybDQwNXg1M29tYzc4OWdjNTJtIn0.K-1QUouqlL8MSHaQAMP_0A';
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/rishivanukuru/ck06xkkby1nrp1cmcadby5s35/draft',
+    center: [69.763000000000005,23.971],
+    zoom: 12
+});
+    
+    map.on('click', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['earthquakes-before-bhuj-v1'] // replace this with the name of the layer
+  });
+
+  if (!features.length) {
+    return;
+  }
+
+  var feature = features[0];
+
+  var popup = new mapboxgl.Popup({ offset: [0, -15] })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
+    .addTo(map);
+});
+
+var chapters = {
+
+    'preBhujOne': {
+        curve:1,
+        //bearing: 27,
+        center: [69.763000000000005,23.971],
+        zoom: 12
+    },
+    'preBhujTwo': {
+        curve: 0.1,
+        duration: 5000,
+        center: [69.672,23.251],
+        zoom: 12.25,
+        pitch: 0
+    },
+    'london-bridge': {
+        bearing: 90,
+        center: [-0.08533793, 51.50438536],
+        zoom: 13,
+        speed: 0.6,
+        pitch: 40
+    },
+    'woolwich': {
+        bearing: 90,
+        center: [0.05991101, 51.48752939],
+        zoom: 12.3
+    },
+    'gloucester': {
+        bearing: 45,
+        center: [-0.18335806, 51.49439521],
+        zoom: 15.3,
+        pitch: 20,
+        speed: 0.5
+    },
+    'caulfield-gardens': {
+        bearing: 180,
+        center: [-0.19684993, 51.5033856],
+        zoom: 12.3
+    },
+    'telegraph': {
+        bearing: 90,
+        center: [-0.10669358, 51.51433123],
+        zoom: 17.3,
+        pitch: 40
+    },
+    'charing-cross': {
+        bearing: 90,
+        center: [-0.12416858, 51.50779757],
+        zoom: 14.3,
+        pitch: 20
+    }
+};
+
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+
+var activeChapterName = 'preBhujOne';
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+
+    map.flyTo(chapters[chapterName]);
+
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+
+    activeChapterName = chapterName;
+}
+
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+
+</script>
+
+</body>
+</html>
