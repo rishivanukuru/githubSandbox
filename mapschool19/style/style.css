@@ -26,7 +26,7 @@ body { margin:0; padding:0; }
 }
 
 #filler {
-    padding: 20px 20px 20px 20px;
+    height: 40vh;
 }
     
 #header{
