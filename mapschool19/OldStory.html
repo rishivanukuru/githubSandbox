@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Bhuj - The Singularity</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' />
+
+    
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+
+<style>
+#map {
+    position: fixed;
+    width:50%;
+
+}
+#features {
+    width: 50%;
+    margin-left: 50%;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    background-color: #f6f6f4;
+}
+ #headingtext{
+    padding:  0px 50px;
+    line-height: 25px;
+    }
+    
+section {
+    padding:  220px 50px 10px 50px;
+    line-height: 25px;
+    opacity: 0.25;
+    font-size: 13px;
+}
+        
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 600px;
+}
+</style>
+
+<div id='map'></div>
+<div id='features'>
+    
+    <section id='prebhujone' class = 'active'>
+        <h3>The morning of 24 December 2000<br>Gujarat, India</h3>
+        <p>The birds, crocodiles, and other wildlife at the Banni Grasslands have just been disturbed by an earthquake measuring 4.6 on the Richter scale. To them it would have probably felt like a herd of elephants stampeding nearby, which might have been a normal occurance had elephants been living in the Salt Flats of North-western Gujarat. In any case, it was a mild quake far from human settlements, one that must have gone unnoticed by most people at the time.</p>
+    </section>
+    
+    <section id='prebhujtwo'>
+        <h3>The day before Republic Day,<br> 25 January 2001</h3>
+        <p>In the municipality of Bhuj, people must have been preparing to mark the occasion of Republic day, or might have been looking forward to the long weekend. Maybe neither of those things mattered, and it was just another normal day for everyone. Surely nobody was expecting anything out of the ordinary. Least of all an earthquake. Not when the last major earthquake to strike the region took place nearly half a century prior.  <br><br> That relatively 'quiet' December quake a few kilometers to the north was perhaps the only indicator of what was to come.  </p>
+    </section>
+    
+    <section id='earthquakehistory'>
+        <h3>Earthquakes in and around Kutch<br>1960-2000</h3>
+        <p>To not expect an earthquake would have been the safest thing to do, statistically speaking. In the years since the last destructive earthquake (which occured in 1956), there were hardly any major incidents in or around the state of Gujarat. Minor quakes yes, but the Rann of Kutch is near a fault line, and smaller shakes are to be expected. In the same duration, a number of much more powerful quakes struck parts of Pakistan to the north-west. There were hardly any such occurences this side of the border.</p>
+    </section>
+    
+    <section id='nuclear'>
+        <h3>Man-made earthquakes<br>The Pokharan Nuclear Tests</h3>
+        <p>In fact, we even made up for the lack of natural earthquakes by creating our own. The Pokharan Nuclear Tests in the years 1974 and 1998 resulted in the some of the largest recorded seismic activities (M5.0 and M5.8 respectively) in the area for that entire duration.</p>
+    </section>
+    
+    <section id='dday'>
+        <h3>Republic Day 2001</h3>
+        <p>And so when people living in Bhuj and the surrounding villages, towns and cities gathered in their homes and in public spaces to enjoy the holiday, they really had no reason to expect anything out of the ordinary.<br><br>
+        Least of all one of the worst earthquakes ever to strike India.
+        </p>
+    </section>
+    
+
+    </div>
+<script>
+    
+    
+mapboxgl.accessToken = 'pk.eyJ1IjoicmlzaGl2YW51a3VydSIsImEiOiJjazA2eGFybDQwNXg1M29tYzc4OWdjNTJtIn0.K-1QUouqlL8MSHaQAMP_0A';
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/rishivanukuru/ck06xkkby1nrp1cmcadby5s35/draft',
+    center: [69.763000000000005,23.971],
+    zoom: 12
+});
+    
+    map.on('load', function(){map.setLayoutProperty('earthquakespostbhuj', 'visibility', 'none');});
+    
+
+
+
+/*    
+map.on('click', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['earthquakes-before-bhuj-v1'] // replace this with the name of the layer
+  });
+
+  if (!features.length) {
+    return;
+  }
+
+  var feature = features[0];
+
+  var popup = new mapboxgl.Popup({ offset: [0, -15] })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
+    .addTo(map);
+});
+*/
+    
+var chapters = {
+
+    'prebhujone': {
+        curve:1,
+        //bearing: 27,
+        center: [69.763000000000005,23.971],
+        zoom: 12
+    },
+    'prebhujtwo': {
+        curve: 0.1,
+        duration: 5000,
+        center: [69.672,23.251],
+        zoom: 12.25,
+        pitch: 0
+    },
+    'earthquakehistory': {
+        center: [70.137, 24.202],
+        zoom: 5.48,
+        duration: 3000
+    },
+    'nuclear': {
+        center: [71.879, 26.972],
+        zoom: 9.96,
+        duration: 3000
+
+    },
+    'dday': {
+        duration: 5000,
+        center: [70.140,23.401],
+        zoom: 8.84,
+        pitch: 0
+    }
+};
+    
+   
+    
+    
+   
+
+
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+
+var activeChapterName = 'preBhujOne';
+    
+    var layerNames = ['earthquakespostbhuj','earthquakes-before-bhuj-v1'];
+    
+function setActiveChapter(chapterName) {
+    
+
+    
+    
+    var visibility = map.getLayoutProperty(layerNames[0], 'visibility');
+
+    if(chapterName == 'dday')
+        {
+            if(visibility != 'visible')
+                {
+                    map.setLayoutProperty(layerNames[0], 'visibility', 'visible');
+                    map.setLayoutProperty(layerNames[1], 'visibility', 'none');
+                    console.Log('switcheroo');
+                }
+            else
+                {
+                            map.setLayoutProperty(layerNames[0], 'visibility', 'none');
+                            map.setLayoutProperty(layerNames[1], 'visibility', 'visible');
+                        
+                }
+        }
+    
+  
+    
+    map.flyTo(chapters[chapterName]);
+
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+
+    activeChapterName = chapterName;
+
+}
+
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+
+</script>
+
+</body>
+</html>
